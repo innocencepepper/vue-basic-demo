@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <span>{{ message }}</span>
+        <p>消息: {{ message }}</p>
+        <hr>
+        <!-- v-text -->
+        <span v-text="message"></span>
+        <p v-text="message">消息：aaaaa</p>
+        <hr>
+
+        <!-- v-html -->
+        <p v-html="message"></p>
+        <p v-html="htmlMessage"></p>
+        <p v-text="htmlMessage"></p>
+    </div>
+
+    <script src="./js/vue.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello,World',
+                htmlMessage: '你好，<span style="color:red">世界</span>'
+            }
+        })
+    </script>
+</body>
+
+</html>

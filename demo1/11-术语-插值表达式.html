@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        - data中的数据属性
+        - 完整的表达式支持：各种JS表达式运算，如数学、逻辑、三元、连字符运算，方法调用等
+     -->
+    <div id="app">
+        {{ num1 }}
+        <hr>
+        {{ num1 + num2 }}
+        <hr>
+        {{ num1 > num2 }}
+        <hr>
+        {{ isShow ? "显示" : "隐藏" }}
+        <hr>
+        {{ "" + num1 + num2 }}
+        <hr>
+        {{ test() }}
+        <hr>
+        {{ if (num1 > num2) { "A" } else { "B" } }}
+    </div>
+
+    <script src="./js/vue.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                num1: 1,
+                num2: 2,
+                isShow: true
+            },
+            methods: {
+                test: function () {
+                    return this.num1 + this.num2
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

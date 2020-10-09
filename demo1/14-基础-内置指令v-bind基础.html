@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 绑定id和title属性 -->
+        <div v-bind:id="id" v-bind:title="message" v-text="message"></div>
+
+        <!-- 给img标签绑定图片地址 -->
+        <img v-bind:src="url" alt="">
+    </div>
+
+    <script src="./js/vue.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id: 1234,
+                message: 'Hello,world',
+                url: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1602228332&di=2120983d654c187cf87eae2889189382&src=http://a3.att.hudong.com/14/75/01300000164186121366756803686.jpg'
+            }
+        })
+    </script>
+</body>
+
+</html>
