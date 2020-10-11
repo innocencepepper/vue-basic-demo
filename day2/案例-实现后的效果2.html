@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #app {
+            width: 600px;
+            margin: 10px auto;
+        }
+
+        .tb {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .tb th {
+            background-color: #0094ff;
+            color: white;
+        }
+
+        .tb td,
+        .tb th {
+            padding: 5px;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .add {
+            padding: 5px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- 表单：添加品牌 -->
+        <div class="add">
+            品牌名称:
+            <input type="text" v-model="newBrandName" v-focus>
+            <input type="button" value="添加" @click="addItem" :disabled="newBrandName === ''">
+        </div>
+
+        <!-- 搜索栏 -->
+        <div class="add">
+            品牌名称:
+            <input type="text" placeholder="请输入搜索条件" v-model="searchKeyword">
+        </div>
+
+        <!-- 品牌列表 -->
+        <table class="tb">
+            <tr>
+                <th>编号</th>
+                <th>品牌名称</th>
+                <th>创立时间</th>
+                <th>操作</th>
+            </tr>
+
+            <tr v-for="(item, index) in filteredBrands" :key="index">
+                <td>{{ index + 1 }}</td>
+                <td>{{ item.name }}</td>
+                <!-- 使用过滤器 -->
+                <td>{{ item.date | fmtDate }}</td>
+                <td>
+                    <a href="#" @click.prevent="removeItem(index)">删除</a>
+                </td>
+            </tr>
+
+            <tr v-if="filteredBrands.length === 0">
+                <td colspan="4">没有品牌数据</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script src="../shared/js/moment.min.js"></script>
+    <script src="../shared/js/vue.js"></script>
+
+    <script>
+        // 定义全局过滤器
+        Vue.filter('fmtDate', (data) => {
+            return moment(data).format('YYYY-MM-DD HH:mm:ss')
+        })
+
+        // 定义全局自定义指令
+        Vue.directive('focus', {
+            inserted(el) {
+                el.focus()
+            }
+        })
+
+        const vm = new Vue({
+            el: '#app',
+
+            data: {
+                // 品牌列表数据
+                brands: [{
+                    name: 'TCL',
+                    date: new Date()
+                }, {
+                    name: '小米',
+                    date: new Date()
+                }, {
+                    name: '华为',
+                    date: new Date()
+                }],
+
+                // 添加表单数据
+                newBrandName: '',
+
+                // 搜索关键字
+                searchKeyword: ''
+            },
+
+            // 计算属性
+            computed: {
+                // 经过条件过滤的brands数组
+                filteredBrands() {
+                    return this.brands.filter(brand => {
+                        return brand.name.indexOf(this.searchKeyword) === 0
+                    })
+                }
+            },
+
+            methods: {
+                // 添加
+                addItem() {
+                    const newBrand = {
+                        name: this.newBrandName,
+                        date: new Date()
+                    }
+                    this.brands.push(newBrand)
+                    this.newBrandName = ''
+                },
+
+                // 删除
+                removeItem(index) {
+                    if (confirm('确认删除吗？')) {
+                        this.brands.splice(index, 1)
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
