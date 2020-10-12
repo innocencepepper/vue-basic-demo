@@ -3,6 +3,5 @@
 目录说明：
 - client 前端页面代码
     - shared/js 公用的 javascript 文件
-    - shared/resources 一些案例的静态资源文件
     - day1 ~ day6 每天的课程代码
 - server 服务端API相关代码
