@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/">主页</router-link>
+        <router-link to="/users">用户</router-link>
+        <hr>
+        <router-view></router-view>
+    </div>
+
+    <script src="../shared/js/vue.js"></script>
+    <script src="../shared/js/vue-router.min.js"></script>
+
+    <script>
+        const Home = {
+            template: `
+                <div>
+                    这是主页Home
+                </div>
+            `
+        }
+
+        const Users = {
+            template: `
+                <div>
+                    这是用户页面Users
+                </div>
+            `
+        }
+
+        const router = new VueRouter({
+            routes: [
+                { path: '/', component: Home },
+                { path: '/users', component: Users },
+            ]
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            router
+        })
+    </script>
+</body>
+
+</html>
