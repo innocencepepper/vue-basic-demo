@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app" class="box">
+        {{ message }}
+    </div>
+
+    <div id="app2" class="box">
+        {{ message }}
+    </div>
+
+    <script src="../shared/js/vue.js"></script>
+
+    <script>
+        new Vue({
+            // 赋值说明：
+            // - 通常是 id 选择器
+            // - 或是一个 DOM 元素
+            // - 可以用其他选择器，选择器匹配到多个元素时只取第一个
+            // - 不能是 html、body 元素
+            el: '#app',
+            // el: document.getElementById('app'),
+            // el: '.box',
+            // el: document.body,
+
+            data: {
+                message: 'Hello,World'
+            }
+        })
+
+        const vm = new Vue({
+            // el: '#app2',
+
+            data: {
+                message: '你好世界'
+            }
+        })
+        
+        vm.$mount('#app2')
+    </script>
+</body>
+
+</html>
+
+
+
+<!-- var a = 1
+var b = 2
+
+var c = a + b
+
+// 3
+
+a = 5
+
+// 3
+c = a + b -->

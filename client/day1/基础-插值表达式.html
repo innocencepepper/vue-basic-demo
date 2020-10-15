@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 算术运算 -->
+        {{ num1 * num2 }}
+
+        <!-- 逻辑运算 -->
+        {{ num1 > num2 }}
+
+        <!-- 三元运算 -->
+        {{ num1 > num2 ? '很贵' : '便宜' }}
+
+        <!-- 连字符运算 -->
+        {{ "" + num1 + num2 }}
+
+        <!-- 不支持完整JS语句 -->
+        <!-- {{ var a = 1; }} -->
+    </div>
+
+    <script src="../shared/js/vue.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+
+            data: {
+                message: 'Hello World',
+                num1: 10,
+                num2: 20
+            }
+        })
+    </script>
+
+</body>
+
+</html>
