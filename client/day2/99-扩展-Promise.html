@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="mydiv"></div>
+
+    <script>
+        // function doSomethingAsync1(callback) {
+        //     setTimeout(() => {
+        //         const a = 1
+        //         const b = 1
+        //         const c = a + b
+
+        //         console.log('>>>>>>我完成啦')
+
+        //         callback(c)
+        //     }, 5000)
+        // }
+
+        // function doSomethingAsync2(callback) {
+        //     setTimeout(() => {
+        //         console.log('>>>>>>我完成啦2')
+        //         callback(new Date())
+        //     }, 2000)
+        // }
+
+        // function afterDoSomethingAsync(data) {
+        //     console.log('++++++ DATA:', data)
+        // }
+
+        // doSomethingAsync1(function (v1) {
+        //     doSomethingAsync2(function (v2) {
+        //         afterDoSomethingAsync(v1)
+        //     })
+        // })
+
+        function doSomethingAsync1() {
+            const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const a = 1
+                    const b = 1
+                    const c = a + b
+
+                    console.log('>>>>>>我完成啦')
+
+                    if (c > 10) {
+                        resolve(c)
+                    } else {
+                        reject('有错啦')
+                    }
+                }, 5000)
+            })
+
+            return promise
+        }
+
+        function doSomethingAsync2() {
+            const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('>>>>>>我完成啦2')
+                    resolve(new Date())
+                }, 2000)
+            })
+
+            return promise
+        }
+
+        function afterDoSomethingAsync(data) {
+            console.log('++++++ DATA:', data)
+        }
+
+        // let result = null
+
+        // doSomethingAsync1().then(function (v1) {
+        //     result = v1
+        // }).then(function() {
+        //     return doSomethingAsync2()
+        // }).then(function (v2) {
+
+        // }).then(function () {
+        //     afterDoSomethingAsync(result)
+        // })
+
+        async function start() {
+            try {
+                const v1 = await doSomethingAsync1()
+                const v2 = await doSomethingAsync2()
+                afterDoSomethingAsync(v1)
+            } catch (e) {
+                //.......
+                console.log(e)
+            }
+        }
+
+        start()
+
+    </script>
+</body>
+
+</html>

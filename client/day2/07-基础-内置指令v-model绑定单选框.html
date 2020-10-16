@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="radio" value="A" v-model="selectedValue">张磊
+        <input type="radio" value="B" v-model="selectedValue">张三
+        <input type="radio" value="C" v-model="selectedValue">李四
+    </div>
+
+    <script src="../shared/js/vue.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                selectedValue: ''
+            }
+        })
+    </script>
+</body>
+
+</html>

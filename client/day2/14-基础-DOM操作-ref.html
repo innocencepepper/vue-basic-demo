@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" ref="myele">
+        <button @click="handler" ref="mybtn">按钮</button>
+    </div>
+
+    <script src="../shared/js/vue.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                content: '',
+            },
+            methods: {
+                handler() {
+                    console.log(this.$refs)
+                    const dom = this.$refs.myele
+                    dom.style.border = "2px solid red"
+                    dom.value = '显示到输入框内的文本'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
