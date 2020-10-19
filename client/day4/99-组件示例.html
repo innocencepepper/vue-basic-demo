@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <button @click="add()">点击我!</button>
+
+            <hr>
+
+            <!-- 分离成单独组件 -->
+            <counter-displayer v-bind:count="count"></counter-displayer>
+        </div>
+    </div>
+
+    <script src="../shared/js/vue.js"></script>
+
+    <script>
+
+        const CounterDisplayer = {
+            template: `
+                <div>
+                    当前计数：{{ count }}
+                </div>
+            `,
+            props: {
+                count: {
+                    type: Number,
+                    value: 0
+                }
+            },
+            // data() {
+            //     return {
+            //         count: 0
+            //     }
+            // }
+        }
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            components: {
+                CounterDisplayer
+            },
+            methods: {
+                add() {
+                    this.count++
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
