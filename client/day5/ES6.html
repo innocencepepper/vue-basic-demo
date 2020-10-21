@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const obj = {
+            a: 1,
+            b: 'hello',
+            c: {
+                x: 1,
+                y: 2
+            }
+        }
+
+        const b = obj.b
+        const { b: bb, c: { x, y } } = obj
+
+        function test({ a }) {
+            console.log(a)
+        }
+
+        test(obj)
+
+        const arr = [1, 2, 3, 4]
+        const [x, y] = arr
+
+        const obj1 = { a: 1, b: 2 }
+        const obj2 = Object.assign({}, obj1)
+        const obj3 = { ...obj1 }
+
+
+        const formData = { username: 'Kevin', password: '123456' }
+        formData.token = 'token value'
+
+        const formDataClone = {
+            ...formData,
+            token: 'token value'
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .router-link-exact-active {
+            background-color: red;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <!-- 声明式导航 -->
+
+            <!-- 使用v-bind语法，绑定一个对象，指定name来给出要跳转到的路由 -->
+            <router-link active-class :to="{ name: 'home' }">主页</router-link>
+
+            <!-- 常规写法，直接给一个路径path -->
+            <router-link active-class to="/products">产品</router-link>
+
+            <!-- 使用v-bind语法，绑定一个定义在data中的对象 -->
+            <router-link active-class :to="link1">用户123详情</router-link>
+        </div>
+
+        <!-- 5.视图容器 -->
+        <router-view></router-view>
+    </div>
+
+    <script src="../shared/js/vue.js"></script>
+
+    <!-- 1.引入vue-router.js -->
+    <script src="../shared/js/vue-router.min.js"></script>
+
+    <script>
+        // 6.创建主页的视图组件
+        const HomePage = {
+            template: `
+                <div>
+                    主页
+                    <button @click="gotoProductPage">跳转到产品页</button>
+                </div>
+            `,
+            methods: {
+                gotoProductPage() {
+                    // 编程式导航
+
+                    // 实例1：
+                    // this.$router.push('/users/111/products/222')
+
+                    // 实例2：
+                    // this.$router.push({
+                    //     name: 'userdetail',
+                    //     params: {
+                    //         userId: 3333,
+                    //         pid: 44444
+                    //     }
+                    // })
+
+                    // 实例3：重定向
+                    this.$router.replace({
+                        name: 'userdetail',
+                        params: {
+                            userId: 3333,
+                            pid: 44444
+                        }
+                    })
+                }
+            }
+        }
+
+        // 7.创建产品页面的视图组件
+        const ProductsPage = {
+            template: `
+                <div>产品页</div>
+            `
+        }
+
+        const UserDetail = {
+            template: `
+                <div>
+                    用户详情页: {{ userId }}
+                </div>
+            `,
+            data() {
+                return {
+                    userId: ''
+                }
+            },
+            created() {
+                // 获取动态路由的参数信息
+                console.log(this.$route)
+
+                const userId = this.$route.params.userId
+                const pid = this.$route.params.pid
+
+                this.userId = userId
+            }
+        }
+
+        // 2.创建VueRouter实例
+        const router = new VueRouter({
+            // 8.配置路由规则：其实就是为路径和页面组件进行匹配
+            routes: [
+                // 使用redirect进行重定向跳转
+                { name: 'landing', path: '/', redirect: '/home' },
+                { name: 'home', path: '/home', component: HomePage },
+                { name: 'products', path: '/products', component: ProductsPage },
+                // 定义动态路由，参数部分使用冒号+一个名字
+                { name: 'userdetail', path: '/users/:userId/products/:pid', component: UserDetail }
+            ]
+        })
+
+        const vm = new Vue({
+            el: '#app',
+
+            data: {
+                link1: { name: 'userdetail', params: { userId: 111, pid: 222 } }
+            },
+
+            // 3.关联VueRouter和Vue实例
+            router
+        })
+    </script>
+</body>
+
+</html>

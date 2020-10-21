@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .border {
+            border: 2px solid red;
+        }
+
+        .smallsize {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- class绑定一个对象 -->
+        <!-- <img :src="url" :class="{ 'border': addBorder, 'smallsize': addSamllSize }" /> -->
+
+        <!-- class绑定一个数组 -->
+        <img :src="url" :class="imgClasses" />
+
+        <button @click="setImageUrl">设置图片</button>
+        <button @click="setImageBorder">设置边框</button>
+        <button @click="setImageSize">设置大小</button>
+        <button @click="setImageClasses">设置样式</button>
+
+
+        <div :style="{ 'color': textColor, 'backgroundColor': bgColor }">Hello,world</div>
+
+        <div :style="[ fontStyles, bgStyles ]">你好世界</div>
+    </div>
+
+    <script src="../shared/js/vue.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                url: '',
+                addBorder: false,
+                addSamllSize: false,
+                imgClasses: [],
+
+                textColor: 'red',
+                bgColor: 'pink',
+
+                fontStyles: { 'color': 'red', 'font-size': '18px' },
+                bgStyles: { 'backgroundColor': 'blue', 'border': '1px solid red' }
+            },
+            methods: {
+                setImageUrl() {
+                    this.url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603276926980&di=0fee8ffb0494f7b4843a5997fcbb7971&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D1484500186%2C1503043093%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1280%26h%3D853'
+                },
+                setImageBorder() {
+                    this.addBorder = true
+                },
+                setImageSize() {
+                    this.addSamllSize = true
+                },
+                setImageClasses() {
+                    this.imgClasses.push('border')
+                    this.imgClasses.push('smallsize')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
