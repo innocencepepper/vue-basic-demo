@@ -25,8 +25,9 @@
             <td>{{ item.name }}</td>
             <td>{{ item.gender }}</td>
             <td>
-              <a href="edit.html">编辑</a> &nbsp;&nbsp;
-              <a href="javascript:window.confirm('Are you sure?')">删除</a>
+              <a href="#" @click.prevent="gotoEditForm(item.id)">编辑</a>
+              &nbsp;&nbsp;
+              <a href="#" @click.prevent="handleRemove(item.id)">删除</a>
             </td>
           </tr>
         </tbody>
@@ -36,7 +37,8 @@
 </template>
 
 <script>
-import axios from "axios";
+// 导入网络请求模块 apis/api
+import api from "@/apis/api";
 
 export default {
   created() {
@@ -55,9 +57,9 @@ export default {
       try {
         // 发送GET请求
         //（记得先启动 json-server，并使用 db-hero.json 作为数据源文件）
-        const { status, data } = await axios.get(
-          "http://localhost:3000/heroes"
-        );
+        // const { status, data } = await this.$http.get("/heroes");
+
+        const { status, data } = await api.getHeroList();
 
         if (status === 200) {
           // 请求成功，更新响应式数据 heroes
@@ -71,6 +73,28 @@ export default {
     // 添加按钮的事件处理函数：跳转到添加表单页面
     gotoAddForm() {
       this.$router.push("/add-hero");
+    },
+
+    // 删除英雄，需要传入 id
+    async handleRemove(id) {
+      // 弹出删除确认框
+      const ok = confirm("确认删除英雄吗？");
+
+      if (ok) {
+        // 发送请求，进行特定id的记录删除
+        const { status } = await api.removeHeroById(id);
+
+        if (status === 200) {
+          // 删除成功，重新加载最新数据
+          this.loadData();
+        } else {
+          alert("删除失败");
+        }
+      }
+    },
+
+    gotoEditForm(id) {
+      this.$router.push(`/edit-hero/${id}`);
     },
   },
 };

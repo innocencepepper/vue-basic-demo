@@ -8,6 +8,7 @@ import HeroList from '@/pages/HeroList.vue'
 import WeapenList from '@/pages/WeapenList.vue'
 import ArmorList from '@/pages/ArmorList.vue'
 import AddHeroForm from '@/pages/AddHeroForm.vue'
+import EditHeroForm from '@/pages/EditHeroForm.vue'
 
 // 使用vue-router插件
 Vue.use(VueRouter)
@@ -26,7 +27,8 @@ const router = new VueRouter({
         // 装备列表页面
         { name: 'armor-list', path: '/armor-list', component: ArmorList },
         // 添加英雄表单页面
-        { name: 'add-hero', path: '/add-hero', component: AddHeroForm }
+        { name: 'add-hero', path: '/add-hero', component: AddHeroForm },
+        { name: 'edit-hero', path: '/edit-hero/:id', component: EditHeroForm }
     ]
 })
 

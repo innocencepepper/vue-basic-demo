@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="sub-header">添加新英雄</h2>
+    <h2 class="sub-header">编辑英雄</h2>
 
     <form>
       <!-- 英雄姓名 -->
@@ -44,18 +44,42 @@ export default {
         name: "",
         gender: "",
       },
+      heroId: "",
     };
   },
 
+  created() {
+    // 获取动态路由中传递的英雄id参数
+    const heroId = this.$route.params.id;
+
+    // 将英雄id参数保存到data中
+    this.heroId = heroId;
+
+    // 加载id对应的英雄数据，并回显到表单中s
+    this.loadHeroById(heroId);
+  },
+
   methods: {
+    async loadHeroById(id) {
+      // 2种不同的 axios 调用API的方式
+      // const { status, data } = await this.$http.get("/heroes/" + id);
+      const { status, data } = await api.getHeroById(id);
+
+      if (status === 200) {
+        // this.hero.name = data.name
+        // this.hero.gender = data.gender
+        this.hero = data;
+      }
+    },
+
     async handleSave() {
       const hero = this.hero;
 
-      // 发送POST请求，保存数据
-      // const { status } = await this.$http.post("/heroes", hero);
-      const { status } = await api.createHero(hero);
+      // 发送PUT请求，更新数据
+      // const { status } = await this.$http.put(`/heroes/${this.heroId}`, hero);
+      const { status } = await api.updateHero(this.heroId, hero);
 
-      if (status === 201) {
+      if (status === 200) {
         // 保存成功，跳转到列表页面
         this.$router.push("/hero-list");
       } else {
