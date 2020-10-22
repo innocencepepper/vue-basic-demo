@@ -1,0 +1,9 @@
+<template>
+  <div>
+    <h3>流行音乐排行榜</h3>
+    <ul>
+      <li>第一名：恰是你的温柔</li>
+      <li>第二名：Mojito</li>
+    </ul>
+  </div>
+</template>

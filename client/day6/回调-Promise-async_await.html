@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script src="./js/jquery.js"></script>
+
+    <script>
+        // 1. 使用回调函数的方式处理异步任务的返回结果
+        // function getBrandList(callback) {
+        //     $.ajax({
+        //         url: 'http://localhost:3000/brands',
+        //         type: 'get',
+        //         success: function (e) {
+        //             callback(null, e)
+        //         },
+        //         error: function (err) {
+        //             callback(err, null)
+        //         }
+        //     })
+        // }
+
+        // getBrandList(function (err, brands) {
+        //     if (err) {
+        //         console.log(err)
+        //         return
+        //     }
+
+        //     const brand = brands[0]
+        //     console.log(brand)
+        // })
+
+
+
+        // 2. 使用Promise的方式处理异步任务的返回结果
+        // function getBrandListPromise() {
+        //     return new Promise((resolve, reject) => {
+        //         $.ajax({
+        //             url: 'http://localhost:3000/brands',
+        //             type: 'get',
+        //             success: function (e) {
+        //                 resolve(e)
+        //             },
+        //             error: function (err) {
+        //                 reject(err)
+        //             }
+        //         })
+        //     })
+        // }
+
+        // 2.1 使用Promise的常规then和catch方法处理结果
+        // getBrandListPromise().then(res => {
+        //     console.log('>>>>>>', res)
+        // }).catch(err => {
+        //     console.log('ERROR:', err)
+        // })
+
+        // 2.2 使用 async/await 来处理结果
+        // async function start() {
+        //     const res = await getBrandListPromise()
+        //     console.log(res)
+        //     console.log(1111111)
+        // }
+        // start()
+
+
+
+        // 3. async函数总是返回一个 Promise 对象
+        // async function test1() {
+        //     return 1
+        // }
+
+        // async function run() {
+        //     const result = await test1()
+        // }
+
+        // run()
+
+
+
+        // 4. 多个异步任务的并行和串行执行
+
+        function buyBeef() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('牛肉买好啦！')
+                    resolve('牛肉')
+                }, 10000)
+            })
+        }
+
+        function buyZhiRan() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('孜然买好啦！')
+                    resolve('孜然')
+                    // reject()
+                }, 1000)
+            })
+        }
+
+        function buyDaSuan() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('大蒜买好啦！')
+                    resolve('大蒜')
+                }, 3000)
+            })
+        }
+
+        // 4.1 并行处理多个异步任务，并将它们纳入一组进行管理；其中的每个任务都成功后，才能执行后续的逻辑
+        // 【执行总时间是其中处理时间最长的那个任务】
+        // const p1 = buyBeef()
+        // const p2 = buyDaSuan()
+        // const p3 = buyZhiRan()
+
+        // Promise.all([p1, p2, p3]).then(result => {
+        //     console.log(result)
+        //     console.log('烧烤会开始啦')
+        // }).catch(err => {
+        //     console.log('烧烤会开不成啦')
+        // })
+
+
+        // 4.2 串行处理多个异步任务，一个挨着一个的执行
+        // 【执行总时间是所有任务所花时间的总和】
+        // async function start1() {
+        //     const res1 = await buyBeef()
+        //     const res2 = await buyDaSuan()
+        //     const res3 = await buyZhiRan()
+        // }
+        // start1()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+<template>
+  <div>
+    <h3>摇滚乐新秀</h3>
+    <ul>
+      <li>赵志远</li>
+      <li>潘玮柏</li>
+    </ul>
+  </div>
+</template>
