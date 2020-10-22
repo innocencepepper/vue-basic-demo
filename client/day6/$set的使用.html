@@ -5,19 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        [v-cloak] {
-            display: none;
-        }
-    </style>
 </head>
 
 <body>
     <div id="app">
-        <div v-once>{{ msg }}</div>
-        <div>{{ msg }}</div>
-
-        <hr>
         <h1>{{ obj.title }}</h1>
         <p>{{ obj.content }}</p>
         <div>分数: {{ obj.score }}</div>
@@ -29,8 +20,8 @@
     <script>
         const vm = new Vue({
             el: '#app',
+
             data: {
-                msg: 'hello,world',
                 obj: {
                     title: '我的书店',
                     content: '书店描述信息',
@@ -39,7 +30,10 @@
 
             methods: {
                 rate() {
+                    // 这样设置score数据,是不会有响应式的效果的
                     // this.obj.score = 5
+
+                    // 需要使用this.$set方法，才能使动态添加的属性具有响应式效果
                     this.$set(this.obj, 'score', 5)
                 }
             }
